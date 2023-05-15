@@ -1,5 +1,5 @@
 import './App.css';
-import Header from './components/organisms/Navigation/Header';
+import HeaderNavigationMenu from './components/organisms/Navigation/HeaderNavigationMenu';
 import {NewsAppProvider} from './components/organisms/context/NewsAppProvider';
 import HomeComponent from './components/pages/Home';
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <NewsAppProvider>
-        <Header title={'React News App'} />
+        <HeaderNavigationMenu title={'React News App'} />
         <HomeComponent />
       </NewsAppProvider>
     </>
