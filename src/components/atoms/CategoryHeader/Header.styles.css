@@ -1,0 +1,22 @@
+h3 {
+  /* display: block; */
+  font-size: 32px;
+  /* margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px; */
+  font-weight: 520;
+  display: flex;
+  padding-left: 40px;
+}
+
+.category-caret-right {
+  width: 36px;
+  height: 36px;
+  padding-top: 8px;
+}
+
+.category-header-wrapper {
+  /* display: flex; */
+  cursor: pointer;
+}

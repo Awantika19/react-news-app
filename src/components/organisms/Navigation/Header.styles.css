@@ -1,0 +1,28 @@
+.header-wrapper {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navigation {
+  display: flex;
+}
+
+.link {
+  margin-left: 16px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
