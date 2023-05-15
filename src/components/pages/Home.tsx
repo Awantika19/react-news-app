@@ -1,29 +1,15 @@
-import {default as React, useContext, useEffect, useReducer} from 'react';
-import {NewsAppContext} from '../../components/organisms/context/NewsAppContext';
+import {default as React, useEffect, useReducer} from 'react';
+import {filterAndSliceArticles} from '../../utils/filterAndSliceArticles/filterAndSliceArticles';
 import {timeElapsedSince} from '../../utils/timeElapsed/timeElapsed';
 import CategoryHeader from '../atoms/CategoryHeader/Header';
-import HorizontalLine from '../atoms/HorizontalLine/HorizontalLine';
 import Loader from '../atoms/Loader/Loader';
 import Card from '../molecules/Card/Card';
 import CategoryComponent from '../molecules/Category/Category';
 import './Home.styles.css';
 const HomeComponent: React.FC = () => {
-  const {headlineByCategory, getHeadlineByCategory}: any =
-    useContext(NewsAppContext);
-  console.log('headlineByCountry-->', headlineByCategory);
-  const filteredData = headlineByCategory?.articles?.filter(
-    (item: any) => item.urlToImage !== null
-  );
-  const slicedData = filteredData?.slice(0, 3);
-  console.log('filteredData', filteredData);
-  const COUNTRY_CODE = 'in';
-  const CATEGORY = 'business';
-  useEffect(() => {
-    getHeadlineByCategory('in', 'general');
-  }, []);
-
+  // const {headlineByCategory, getHeadlineByCategory}: any =
+  //   useContext(NewsAppContext);
   const initialState = {
-    general: [],
     business: [],
     entertainment: [],
     health: [],
@@ -56,10 +42,11 @@ const HomeComponent: React.FC = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const API_KEY = 'f463419c4e4c4ebd96549c95688e979b';
+  const key = '6e256f9c5c604636a85c33f828af7b7e';
   const fetchArticles = async (category: any) => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=${API_KEY}`
+        `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=${key}`
       );
       const data = await response.json();
       dispatch({type: 'FETCH_SUCCESS', category, articles: data.articles});
@@ -69,7 +56,6 @@ const HomeComponent: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchArticles('general');
     fetchArticles('business');
     fetchArticles('entertainment');
     fetchArticles('health');
@@ -79,7 +65,6 @@ const HomeComponent: React.FC = () => {
   }, []);
 
   const {
-    general,
     business,
     entertainment,
     health,
@@ -89,6 +74,14 @@ const HomeComponent: React.FC = () => {
     loading,
     error,
   } = state;
+
+  console.log('Business:', business);
+  console.log('Entertainment:', entertainment);
+  console.log('Health:', health);
+  console.log('Science:', science);
+  console.log('Sports:', sports);
+  console.log('Technology:', technology);
+  console.log('Loading:', loading);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -111,21 +104,26 @@ const HomeComponent: React.FC = () => {
               throw new Error('Function not implemented.');
             }}
           />
-          <HorizontalLine color={'#EEEEEE'} height={2} />
+          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
 
-          {slicedData ? (
-            slicedData?.map((item: any, index: number) => (
-              <Card
-                imageUrl={item.urlToImage}
-                title={item.title}
-                lastUpdated={timeElapsedSince(item.publishedAt)}
-              />
-            ))
+          {technology ? (
+            filterAndSliceArticles(technology, 3).map(
+              (article: any, index: number) => (
+                <Card
+                  key={index}
+                  url={article.url}
+                  imageUrl={article.urlToImage}
+                  title={article.title}
+                  lastUpdated={timeElapsedSince(article.publishedAt)}
+                />
+              )
+            )
           ) : (
             <Loader />
           )}
         </div>
         {/* center */}
+
         <div className='flex-item-center'>
           <CategoryHeader
             title={'Health'}
@@ -133,24 +131,124 @@ const HomeComponent: React.FC = () => {
               throw new Error('Function not implemented.');
             }}
           />
-          <HorizontalLine color={'#EEEEEE'} height={2} />
+          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
 
-          {health.map((article: any) => (
-            <Card
-              imageUrl={article.urlToImage}
-              title={article.title}
-              lastUpdated={timeElapsedSince(article.publishedAt)}
-            />
-          ))}
+          {health &&
+            filterAndSliceArticles(health, 3).map(
+              (article: any, index: number) => (
+                <Card
+                  key={index}
+                  url={article.url}
+                  imageUrl={article.urlToImage}
+                  title={article.title}
+                  lastUpdated={timeElapsedSince(article.publishedAt)}
+                />
+              )
+            )}
         </div>
         {/* right */}
         <div className='flex-item-right'>
-          <Card
-            imageUrl='https://picsum.photos/id/237/400/300'
-            title='Lorem Ipsum-3'
-            description='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo euismod purus vitae bibendum.'
-            lastUpdated='May 13, 2023'
+          <CategoryHeader
+            title={'Science'}
+            onClick={function (): void {
+              throw new Error('Function not implemented.');
+            }}
           />
+          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+          {science ? (
+            filterAndSliceArticles(science, 3).map(
+              (article: any, index: number) => (
+                <Card
+                  key={index}
+                  url={article.url}
+                  imageUrl={article.urlToImage}
+                  title={article.title}
+                  lastUpdated={timeElapsedSince(article.publishedAt)}
+                />
+              )
+            )
+          ) : (
+            <Loader />
+          )}
+        </div>
+      </div>
+      <div className='flex-container'>
+        {/* left */}
+        <div className='flex-item-left'>
+          <CategoryHeader
+            title={'Sports'}
+            onClick={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
+          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+          {sports ? (
+            filterAndSliceArticles(sports, 3).map(
+              (article: any, index: number) => (
+                <Card
+                  key={index}
+                  url={article.url}
+                  imageUrl={article.urlToImage}
+                  title={article.title}
+                  lastUpdated={timeElapsedSince(article.publishedAt)}
+                />
+              )
+            )
+          ) : (
+            <Loader />
+          )}
+        </div>
+        {/* center */}
+
+        <div className='flex-item-center'>
+          <CategoryHeader
+            title={'Entertainment'}
+            onClick={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
+          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+          {entertainment &&
+            filterAndSliceArticles(entertainment, 3).map(
+              (article: any, index: number) => (
+                <Card
+                  key={index}
+                  url={article.url}
+                  imageUrl={article.urlToImage}
+                  title={article.title}
+                  lastUpdated={timeElapsedSince(article.publishedAt)}
+                />
+              )
+            )}
+        </div>
+        {/* right */}
+        <div className='flex-item-right'>
+          <CategoryHeader
+            title={'Business'}
+            onClick={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
+          {/* <HorizontalLine color={'#EEEEEE'} height={2} /> */}
+
+          {business ? (
+            filterAndSliceArticles(business, 3).map(
+              (article: any, index: number) => (
+                <Card
+                  key={index}
+                  url={article.url}
+                  imageUrl={article.urlToImage}
+                  title={article.title}
+                  lastUpdated={timeElapsedSince(article.publishedAt)}
+                />
+              )
+            )
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </>

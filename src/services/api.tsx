@@ -20,7 +20,7 @@ export const getHeadlineByCountry = async () => {
     )
     .then((response: any) => {
       // handle success
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     })
     .catch((error: any) => {
