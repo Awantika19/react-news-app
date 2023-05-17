@@ -1,8 +1,6 @@
 .search-form {
   display: flex;
   align-items: center;
-  /* width: 200px; */
-  /* margin-bottom: 16px; */
 }
 
 .search-input {

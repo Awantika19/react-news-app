@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {fetchSearchDataApi} from '../../../services/api';
-import './Search.styles.css'; // Import CSS file
+import './Search.styles.css';
 export const SearchComponent = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,12 +11,9 @@ export const SearchComponent = () => {
     setSearchQuery(event.target.value);
   };
 
-  // console.log('searchQuery', searchQuery);
-  // console.log('searchResult', searchResult);
   const handleSearch = async () => {
     try {
       const response = await fetchSearchDataApi(searchQuery);
-      console.log('response-->>--searchResult>', response?.data?.articles);
       setSearchResult(response?.data?.articles);
 
       const category = {

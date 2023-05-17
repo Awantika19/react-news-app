@@ -42,27 +42,6 @@ const HomeComponent: React.FC = () => {
     error: null,
   };
 
-  // -------8888888888888888
-
-  // console.log('searchQuery--@@@', searchQuery);
-  // console.log('searchResult--@@', searchResult);
-
-  // if (searchResult.length > 1) {
-  //   // const response = await fetchSearchData(queryState);
-
-  //   console.log('searchQuery+++', searchQuery);
-
-  //   const category = {
-  //     title: `Search Results found ${searchQuery}`,
-  //     data: searchResult,
-  //   };
-
-  //   navigate(`/detail/search`, {state: {category}});
-  // }
-  // // useEffect(() => {
-  // //   if (searchResult.length > 1) searchAllData();
-  // // }, []);
-
   const reducer = (state: any, action: any) => {
     switch (action.type) {
       case 'FETCH_SUCCESS':
@@ -94,7 +73,7 @@ const HomeComponent: React.FC = () => {
   const fetchArticles = async (category: any) => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=${key5}`
+        `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=${API_KEY}`
       );
       const data = await response.json();
       switch (category) {
@@ -144,18 +123,6 @@ const HomeComponent: React.FC = () => {
     loading,
     error,
   } = state;
-
-  // console.log('Business:', business);
-  // console.log('Entertainment:', entertainment);
-  // console.log('Health:', health);
-  // console.log('Science:', science);
-  // console.log('Sports:', sports);
-  // console.log('Technology:', technology);
-  // console.log('Loading:', loading);
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
 
   if (error) {
     return <div>Error: {error.message}</div>;
