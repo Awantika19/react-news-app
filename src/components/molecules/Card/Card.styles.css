@@ -29,7 +29,12 @@
   width: 60%;
   padding: 16px;
 }
-
+.card-source {
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 4px;
+  color: black;
+}
 .card-title {
   font-size: 20px;
   font-weight: 500;
@@ -42,7 +47,7 @@
 } */
 
 .card-description {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.4;
   margin: 0;
   margin-bottom: 8px;

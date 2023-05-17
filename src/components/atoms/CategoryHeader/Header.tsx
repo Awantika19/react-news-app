@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.styles.css';
 type CategoryHeaderProps = {
   title: string;
-  onClick: () => void;
+  onClick?: any;
   style?: React.CSSProperties;
 };
 
@@ -10,7 +10,7 @@ const CategoryHeader = ({title, onClick, style}: CategoryHeaderProps) => {
   return (
     <div className='category-header-wrapper'>
       <a onClick={onClick}>
-        <h3 style={style}>
+        <h3 style={style} className='category-header-title'>
           {title}
           <span className='category-caret-right'>
             <svg

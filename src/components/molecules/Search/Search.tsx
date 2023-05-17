@@ -1,36 +1,46 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {fetchSearchDataApi} from '../../../services/api';
 import './Search.styles.css'; // Import CSS file
+export const SearchComponent = () => {
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
-interface SearchProps {
-  onSearch: (query: string) => void;
-}
-
-const SearchComponent: React.FC<SearchProps> = ({onSearch}) => {
-  const [query, setQuery] = useState('');
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+  const handleInputChange = (event: any) => {
+    setSearchQuery(event.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSearch(query);
+  // console.log('searchQuery', searchQuery);
+  // console.log('searchResult', searchResult);
+  const handleSearch = async () => {
+    try {
+      const response = await fetchSearchDataApi(searchQuery);
+      console.log('response-->>--searchResult>', response?.data?.articles);
+      setSearchResult(response?.data?.articles);
+
+      const category = {
+        title: `Search Results found - ${searchQuery}`,
+        data: response?.data?.articles,
+      };
+      navigate('/detail/search', {state: {category}});
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   return (
-    <form className='search-form' onSubmit={handleSubmit}>
+    <div className='search-form'>
       <input
         className='search-input'
         type='text'
         placeholder='Search...'
-        value={query}
+        value={searchQuery}
         onChange={handleInputChange}
       />
-      <button className='search-button' type='submit'>
+      <button className='search-button' onClick={handleSearch}>
         Search
       </button>
-    </form>
+    </div>
   );
 };
-
-export default SearchComponent;

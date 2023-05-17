@@ -7,7 +7,7 @@
   /* display: flex; */
   float: left;
   width: 12%;
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 .search-button-wrapper {
   /* display: flex; */
@@ -20,6 +20,7 @@
 .title {
   font-size: 24px;
   font-weight: bold;
+  padding-left: 8px;
 }
 
 .header-navigation-menu-container {
@@ -28,13 +29,13 @@
   align-items: center;
   background-color: #333;
 }
-/* 
+
 .navigation {
   display: flex;
 }
 
 .link {
-  margin-left: 16px;
+  margin-right: 16px;
   color: #fff;
   text-decoration: none;
   font-size: 24px;
@@ -42,4 +43,8 @@
 
 .link:hover {
   text-decoration: underline;
-} */
+}
+
+.home-icon {
+  border: 2px solid #fff;
+}

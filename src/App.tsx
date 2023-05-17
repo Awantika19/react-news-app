@@ -1,15 +1,19 @@
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import './App.css';
-import HeaderNavigationMenu from './components/organisms/Navigation/HeaderNavigationMenu';
-import {NewsAppProvider} from './components/organisms/context/NewsAppProvider';
-import HomeComponent from './components/pages/Home';
-
+import DetailPage from './components/pages/DetailPage/DetailPage';
+import HomeComponent from './components/pages/HomePage/Home';
+import NotFound from './components/pages/NotFound/notfound';
 function App() {
   return (
     <>
-      <NewsAppProvider>
-        <HeaderNavigationMenu title={'React News App'} />
-        <HomeComponent />
-      </NewsAppProvider>
+      {/* <HomeComponent /> */}
+      <Router>
+        <Routes>
+          <Route path='/' element={<HomeComponent />} />
+          <Route path='/detail/:category' element={<DetailPage />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </Router>
     </>
   );
 }

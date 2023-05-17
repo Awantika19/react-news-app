@@ -1,28 +1,56 @@
+import {useContext} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {categoryTokens} from '../../../constants/categoryToken';
 import ButtonComponent from '../../atoms/Button/Button';
+import {NewsAppContext} from '../../organisms/context/NewsAppContext';
 import './Category.styles.css';
-const categoryTokens = [
-  {category: 'business', color: '#FCC1B0'},
-  {category: 'entertainment', color: '#B2D2E8'},
-  {category: 'general', color: '#CFB7ED'},
-  {category: 'health', color: '#F4D1A6'},
-  {category: 'science', color: '#C5AE88'},
-  {category: 'sports', color: '#C1E0C8'},
-  {category: 'technology', color: '#D7C2D7'},
-];
-
 const CategoryComponent = () => {
-  const handleCategoryClick = (category: string) => {
-    console.log(`Category ${category} clicked!`);
+  const navigate = useNavigate();
+  const {
+    businessState,
+    entertainmentState,
+    healthState,
+    scienceState,
+    sportsState,
+    technologyState,
+  }: any = useContext(NewsAppContext);
+  const categoryDetailPage = (categoryName: any, data: any) => {
+    const category = {title: categoryName, data: data};
+    navigate(`/detail/${categoryName}`, {state: {category}});
+  };
+  const handleCategory = (categoryName: any) => {
+    switch (categoryName) {
+      case 'business':
+        categoryDetailPage(categoryName, businessState);
+        break;
+      case 'entertainment':
+        categoryDetailPage(categoryName, entertainmentState);
+        break;
+      case 'health':
+        categoryDetailPage(categoryName, healthState);
+        break;
+      case 'science':
+        categoryDetailPage(categoryName, scienceState);
+        break;
+      case 'sports':
+        categoryDetailPage(categoryName, sportsState);
+        break;
+      case 'technology':
+        categoryDetailPage(categoryName, technologyState);
+        break;
+      default:
+        console.error(`Invalid category: ${categoryName}`);
+    }
   };
 
   return (
     <section className='category-wrapper'>
-      {categoryTokens.map(({category, color}) => (
+      {categoryTokens.map(({categoryName, color}) => (
         <ButtonComponent
-          key={category}
-          onClick={() => handleCategoryClick(category)}
+          key={categoryName}
+          onClick={() => handleCategory(categoryName)}
           style={{backgroundColor: color}}>
-          {category}
+          {categoryName}
         </ButtonComponent>
       ))}
     </section>

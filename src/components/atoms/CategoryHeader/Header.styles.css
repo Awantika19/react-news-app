@@ -19,4 +19,9 @@ h3 {
 .category-header-wrapper {
   /* display: flex; */
   cursor: pointer;
+  color: #1867dc;
+}
+
+.category-header-title {
+  text-transform: capitalize;
 }
