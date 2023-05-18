@@ -33,7 +33,7 @@ This project is a React-based news application built using TypeScript. It allows
 3. Add the following line to the `.env` file and replace `<YOUR_API_KEY>` with your actual API key:
 
 
-2. Open your web browser and navigate to `http://localhost:3000`.
+2. Open your web browser and navigate to `http://localhost:5173`.
 
 ## Folder Structure
 
